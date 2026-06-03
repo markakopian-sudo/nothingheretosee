@@ -4,35 +4,251 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JoJOOOO</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Base & Reset Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0d0d11;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a26 0%, #0d0d11 100%);
+            color: #f0f0f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding-bottom: 40px;
+        }
+
+        /* --- Top Control Bar --- */
+        .top-navbar {
+            display: flex;
+            background-color: rgba(30, 30, 40, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 8px 16px;
+            margin-top: 20px;
+            gap: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-icon-btn {
+            background: none;
+            border: none;
+            color: #a0a0b0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .nav-icon-btn:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* --- Main UI Content Wrapper --- */
+        .dashboard-main {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin-top: 6vh;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            text-transform: lowercase;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Shortcut Platform Row --- */
+        .platform-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .platform-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Specific Platform Background Colors */
+        .btn-yt { background-color: #ff0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
+        .btn-tw { background-color: #9146ff; box-shadow: 0 4px 15px rgba(145, 70, 255, 0.3); }
+        .btn-dc { background-color: #5865f2; box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3); }
+        .btn-gh { background-color: #24292e; box-shadow: 0 4px 15px rgba(36, 41, 46, 0.3); }
+
+        /* --- Search Bar & Inputs --- */
+        .search-container {
+            width: 100%;
+            max-width: 480px;
+            margin-bottom: 3rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 24px;
+            background-color: #161622;
+            border: 1px solid #2d2d3d;
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-box:focus {
+            border-color: #5865f2;
+            background-color: #1c1c2b;
+            box-shadow: 0 0 12px rgba(88, 101, 242, 0.2);
+        }
+
+        /* --- Target Embedding Display Pane --- */
+        .display-pane {
+            width: 100%;
+            height: 500px;
+            background-color: #111116;
+            border: 2px solid #22222c;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            background-color: #181822;
+            padding: 8px 16px;
+            border-bottom: 1px solid #22222c;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #6e6e7e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pane-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ff5f56;
+            display: inline-block;
+        }
+
+        .pane-dot:nth-child(2) { background-color: #ffbd2e; }
+        .pane-dot:nth-child(3) { background-color: #27c93f; }
+
+        .pane-title {
+            margin-left: 8px;
+        }
+
+        .embedded-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #1a1a24;
+        }
+
+        /* --- Footer --- */
+        .footer-text {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: #4e4e62;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="dashboard-container">
-        <h1 class="main-title">JoJOOOO</h1>
+    <nav class="top-navbar">
+        <button class="nav-icon-btn" title="Home" onclick="resetFrame()">🏠</button>
+        <button class="nav-icon-btn" title="Settings">⚙️</button>
+        <button class="nav-icon-btn" title="Profile">👤</button>
+    </nav>
 
-        <div class="shortcut-grid">
-            <a href="https://www.youtube.com" class="shortcut-item" target="_blank" aria-label="YouTube">
-                <span class="icon-placeholder utube">YT</span>
-            </a>
-            <a href="https://www.twitch.tv" class="shortcut-item" target="_blank" aria-label="Twitch">
-                <span class="icon-placeholder twitch">TW</span>
-            </a>
-            <a href="https://discord.com" class="shortcut-item" target="_blank" aria-label="Discord">
-                <span class="icon-placeholder discord">DC</span>
-            </a>
+    <main class="dashboard-main">
+        <h1 class="site-title">jojoooo</h1>
+
+        <div class="platform-row">
+            <a href="https://www.youtube.com/embed" target="view-frame" class="platform-btn btn-yt" title="YouTube">YT</a>
+            <a href="https://player.twitch.tv/?channel=twitch&parent=localhost" target="view-frame" class="platform-btn btn-tw" title="Twitch">TW</a>
+            <a href="https://discord.com/widget?id=your-server-id" target="view-frame" class="platform-btn btn-dc" title="Discord">DC</a>
+            <a href="https://github.com" target="view-frame" class="platform-btn btn-gh" title="GitHub">GH</a>
         </div>
 
-        <div class="search-section">
-            <form action="https://www.google.com/search" method="get" target="_blank">
-                <input type="text" name="q" class="search-input" placeholder="Search the web..." required>
+        <div class="search-container">
+            <form id="searchForm" onsubmit="handleSearch(event)">
+                <input type="text" id="searchInput" class="search-box" placeholder="search anything..." required>
             </form>
         </div>
 
-        <footer class="dashboard-footer">
-            <p>Welcome to your personal dashboard configuration.</p>
-        </footer>
-    </div>
+        <div class="display-pane">
+            <div class="pane-header">
+                <span class="pane-dot"></span>
+                <span class="pane-dot"></span>
+                <span class="pane-dot"></span>
+                <span class="pane-title" id="frameStatus">Display Viewport (Sandbox Active)</span>
+            </div>
+            <iframe name="view-frame" id="viewFrame" class="embedded-frame" src="about:blank"></table>
+        </div>
 
+        <p class="footer-text">online users: 1</p>
+    </main>
+
+    <script>
+        function handleSearch(event) {
+            event.preventDefault();
+            const input = document.getElementById('searchInput').value;
+            const frame = document.getElementById('viewFrame');
+            const status = document.getElementById('frameStatus');
+            
+            // Constructs a search engine query structured for embedding
+            // Note: Many standard domains enforce strict X-Frame-Options headers that prevent iframe rendering.
+            const targetUrl = "https://www.bing.com/search?q=" + encodeURIComponent(input);
+            
+            frame.src = targetUrl;
+            status.innerText = "Loading external destination: " + input;
+        }
+
+        function resetFrame() {
+            const frame = document.getElementById('viewFrame');
+            const status = document.getElementById('frameStatus');
+            frame.src = "about:blank";
+            status.innerText = "Display Viewport (Sandbox Active)";
+            document.getElementById('searchInput').value = "";
+        }
+    </script>
 </body>
 </html>
